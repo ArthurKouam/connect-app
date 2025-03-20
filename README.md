@@ -1,6 +1,11 @@
 # Connect (connect)
 
-Un reseau social ou on peut creer des post et interegir
+Un reseau social ou on peut creer des post et ajouter des amis Fonctionnalites avenir:
+- Ajouter des Status
+- Page des notifications
+- Notifications push
+- Like sous les posts
+- etc...
 
 ## Install the dependencies
 ```bash
