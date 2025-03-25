@@ -12,6 +12,7 @@
     active-color = "primary"
   >
     <q-route-tab name="home" icon="home" replace label="Home" to="/" />
+    <q-route-tab name="status" icon="circle" replace label="Status" to="/status" />
     <q-route-tab name="friends" icon="group" label="Friends" to="/friends" />
     <q-route-tab name="profile" icon="account_box" label="profile" to="/profile" />
   </q-tabs>
@@ -31,5 +32,6 @@
 <style scoped>
   .blur{
     backdrop-filter: blur(30px);
+    justify-content: space-between;
   }
 </style>

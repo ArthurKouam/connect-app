@@ -76,8 +76,18 @@ export const useFriendStore = defineStore('friends', () => {
       await api.post('/friend-requests', { id: userId }, {
         headers: { Authorization: `Bearer ${token}` }
       })
+
+      deleteFromRecommend(userId);
     } catch (error) {
       console.error(error)
+    }
+  }
+
+  const deleteFromRecommend = (id)=>{
+    const index = recommend.value.findIndex(user => user.id == id);
+
+    if(index != -1){
+      recommend.value.splice(index, 1)
     }
   }
 

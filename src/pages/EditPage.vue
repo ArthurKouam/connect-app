@@ -7,20 +7,23 @@ import { useRouter } from 'vue-router';
 
   const userStore = useUserStore();
   const router = useRouter();
+  const isLoading = ref(false);
 
   const user = userStore.getUser;
   const name = ref(user.name);
   const username = ref(user.username);
+  const actus = ref(user.actus)
   const picture = ref();
   const verifyProgress = ref(false)
   const disponibility = ref(true)
   const errorName = ref(false)
 
   const modifyprofile = async () => {
-    if(name.value != "" && username.value != ""){
+    isLoading.value = true;
+    if(name.value != "" && username.value != "" && actus.value != ""){
       console.log('picture: ', picture.value)
       try {
-        const response = await api.putForm(`/user/${user.id}`, {username: username.value, name: name.value, picture: picture.value}, {
+        const response = await api.putForm(`/user/${user.id}`, {username: username.value, name: name.value, picture: picture.value, actus: actus.value}, {
           headers: {
             Authorization: `bearer ${userStore.getToken.token}`,
             'Content-Type': 'multipart/form-data',
@@ -33,6 +36,8 @@ import { useRouter } from 'vue-router';
         router.replace('/profile');
       } catch (error) {
         console.log(error);
+      }finally{
+        isLoading.value = false;
       }
     }
   }
@@ -98,13 +103,25 @@ import { useRouter } from 'vue-router';
       <p class=" text-red-10" v-if="!disponibility">Nom d'utilisateur indisponible</p>
 
       <div class="q-mt-lg">
+        <label for="">Choisissez une actus</label>
+        <q-input class="q-mt-sm" required outlined type="text"  v-model="actus" label="Actus" />
+      </div>
+
+      <div class="q-mt-lg">
         <label for="">Choisissez une photo de profile</label>
         <input class="q-mt-md" accept="image/*" type="file" @change="handleFile" />
       </div>
      
 
       <div class=" q-mt-lg">
-        <q-btn label="Modifier" :disabled="!disponibility || verifyProgress || errorName" type="submit" color="primary"/>
+        <q-btn label="Modifier" :disabled="!disponibility || verifyProgress || errorName" type="submit" color="primary">
+          <q-spinner
+            color="primary"
+            size="1rem"
+            v-if="isLoading"
+            :thickness="5"
+          />
+        </q-btn>
         <q-btn label="Annuler" type="reset" color="primary" flat class="q-ml-sm" />
       </div>
     </form>

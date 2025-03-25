@@ -43,7 +43,15 @@ import { ref } from 'vue';
 
     </div>
     <div>
-      <q-btn label="Publier le post" class="full-width q-mt-lg" type="submit" color="primary"/>
+      <q-btn label="Publier le post" class="full-width q-mt-lg" :disabled="postStore.getLoading || (post === '' && !files)" type="submit" color="primary">   
+          <q-spinner 
+            color="white"
+            size="1rem"
+            :thickness="5"
+            class="q-ml-sm"
+            v-if="postStore.getLoading"
+          />
+      </q-btn>
     </div>
   </form>
 </template>

@@ -39,7 +39,7 @@
       </q-avatar>
 
       <q-card-section vertical class="full-width">
-        <div class="row items-center no-wrap">
+        <div class="row items-center no-wrap" @click.stop="$router.push(`/user/${post.user.id}`)">
           <div class="">{{ post.user.name }}</div>
           <div class="text-grey-7 q-ml-sm">@{{ post.user.username }}</div>
           <q-space />

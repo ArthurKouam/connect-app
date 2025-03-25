@@ -46,6 +46,8 @@ export const usePostStore = defineStore('posts', ()=>{
       return
     }
 
+    isLoading.value = true;
+
     try {
 
       const response = await api.postForm('/posts', {description: content, picture: files}, {
@@ -62,6 +64,8 @@ export const usePostStore = defineStore('posts', ()=>{
 
     } catch (error) {
       console.log(error);
+    }finally{
+      isLoading.value = false
     }
 
   }

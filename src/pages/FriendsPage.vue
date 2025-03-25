@@ -13,6 +13,7 @@
 </script>
 
 <template>
+  <h1 class=" text-h6 text-weight-bold text-center" style="margin-top: 0; padding-top: 0;">Récommandations</h1>
   <div class="card-container q-pa-sm">
     <FriendCard
       v-for="user in friendStore.getRecommend"

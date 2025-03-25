@@ -9,7 +9,7 @@ import FriendComponent from 'src/components/Friend/FriendComponent.vue';
 <template>
   <h1 class=" text-h6 text-weight-bold text-center" style="margin-top: 0; padding-top: 0;">Mes amis</h1>
   <div class=" q-pa-md ">
-    <q-list bordered>
+    <q-list>
       <FriendComponent 
         v-for="user in friendStore.getMyFriend"
         :key="user.id"

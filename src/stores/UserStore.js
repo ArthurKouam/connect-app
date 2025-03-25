@@ -11,9 +11,12 @@ export const useUserStore = defineStore('user', ()=>{
   const token = ref(LocalStorage.getItem('token') || null);
   const profile = ref();
   const router = useRouter();
+  const isLoading = ref(false)
   
 
   const getUser = computed(()=> user.value);
+
+  const getIsLoading = computed(() => isLoading.value)
 
   const getToken = computed(()=> token.value);
 
@@ -29,6 +32,7 @@ export const useUserStore = defineStore('user', ()=>{
 
   const register = async (email, name, username, password) =>{
     try {
+      isLoading.value = true;
       const response = await api.postForm('/auth/register', {email, name, username, password});
 
       if(response.status == 200){
@@ -41,10 +45,13 @@ export const useUserStore = defineStore('user', ()=>{
       }
     } catch (error) {
       console.log(error)
+    }finally{
+      isLoading.value = false
     }
   }
 
   const login = async (email, password) => {
+    isLoading.value = true;
     try {
       const response = await api.postForm('/auth/login', {email, password});
 
@@ -58,6 +65,8 @@ export const useUserStore = defineStore('user', ()=>{
       }
     } catch (error) {
       console.log(error)
+    }finally{
+      isLoading.value = false
     }
   }
 
@@ -89,7 +98,7 @@ export const useUserStore = defineStore('user', ()=>{
     }
   }
 
-  return {login, logout, register, replace, isAuthentificate, getUser, getToken, setUser, getUserProfile, getProfile}
+  return {login, logout, register, replace, isAuthentificate, getUser, getIsLoading, getToken, setUser, getUserProfile, getProfile}
 })
 
 if (import.meta.hot) {

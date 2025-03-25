@@ -33,7 +33,16 @@ function handleBackButton() {
       <q-input outlined type="email"  v-model="email" label="Adresse Email" />
 
       <q-input class="q-mt-lg" outlined  v-model="password" label="Mot de passe" />   <br>
-      <q-btn type="submit" class="q-mt-lg full-width bg-primary text-white rounded-borders">Se connecter</q-btn>
+      <q-btn :disabled="userStore.getIsLoading" type="submit" class="q-mt-lg full-width bg-primary text-white rounded-borders">
+        <q-spinner
+          v-if="userStore.getIsLoading"
+          color="whit"
+          size="1rem"
+          class="q-mr-sm"
+          :thickness="5"
+        />
+        Se connecter
+      </q-btn>
 
     </q-form>
     <p class="q-mt-lg text-center">Vous n'avez pas de compte ? <router-link to="/register" replace>S'inscrire</router-link></p>

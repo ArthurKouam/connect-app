@@ -16,6 +16,7 @@ import askComponent from "components/Friend/askComponent.vue";
 </script>
 
 <template>
+  <h1 class=" text-h6 text-weight-bold text-center" style="margin-top: 0; padding-top: 0;">Demande reçus</h1>
   <div class="card-container q-pa-sm">
     <askComponent
       v-for="user in friendStore.getAsks"
